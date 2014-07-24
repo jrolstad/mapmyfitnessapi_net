@@ -45,6 +45,7 @@ namespace mapmyfitnessapi_sdk.users
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 var response = await client.GetAsync("v7.0/user/self/");
+
                 if (response.IsSuccessStatusCode)
                 {
                     var user = await response.Content.ReadAsAsync<dynamic>();

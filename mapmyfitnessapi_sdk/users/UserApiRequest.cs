@@ -4,7 +4,7 @@
     {
         public int UserId { get; set; }
 
-        public UserApiRequest WithUserId(string id)
+        public UserApiRequest WithUserId(int id)
         {
             UserId = id;
 
