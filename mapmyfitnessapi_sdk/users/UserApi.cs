@@ -12,9 +12,9 @@ namespace mapmyfitnessapi_sdk.users
     {
         private readonly Uri _baseUrl;
 
-        public UserApi():this("https://oauth2-api.mapmyapi.com")
+        public UserApi() : this("https://oauth2-api.mapmyapi.com")
         {
-            
+
         }
 
         public UserApi(string baseUrl)
@@ -29,14 +29,6 @@ namespace mapmyfitnessapi_sdk.users
 
         public User GetUser(UserApiRequest request)
         {
-            var task = GetUserAsync(request);
-            task.Wait();
-
-            return task.Result;
-        }
-
-        private async Task<User> GetUserAsync(UserApiRequest request)
-        {
             using (var client = new HttpClient())
             {
                 client.BaseAddress = _baseUrl;
@@ -44,18 +36,24 @@ namespace mapmyfitnessapi_sdk.users
                 client.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", request.AccessToken));
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var response = await client.GetAsync("v7.0/user/self/");
-
+                var response = client.GetAsync("v7.0/user/self/").Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    var user = await response.Content.ReadAsAsync<dynamic>();
+                    var userData = response.Content.ReadAsAsync<dynamic>().Result;
+                    var user = Map(userData);
 
                     return user;
                 }
 
-                throw new HttpRequestException(string.Format("Http Status:{0}| Reason:{1}",response.StatusCode,response.ReasonPhrase));
+                throw new HttpRequestException(string.Format("Http Status:{0}| Reason:{1}", response.StatusCode,
+                    response.ReasonPhrase));
 
             }
+        }
+
+        private User Map(dynamic userData)
+        {
+            return new User();
         }
     }
 }
