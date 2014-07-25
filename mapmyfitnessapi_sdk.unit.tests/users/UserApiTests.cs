@@ -96,6 +96,16 @@ namespace mapmyfitnessapi_sdk.unit.tests.users
             Assert.That(result.TimeZone, Is.EqualTo(@"America/Los_Angeles"));
             Assert.That(result.Birthdate, Is.EqualTo(new DateTime(1977, 3, 30, 8, 0, 0)));
             Assert.That(result.ProfileStatement, Is.EqualTo("what I do"));
+            Assert.That(result.SelfLink.Id,Is.EqualTo("502434"));
+            Assert.That(result.SelfLink.Href,Is.EqualTo(@"/v7.0/user/502434/"));
+            Assert.That(result.WorkoutsLink.Href,Is.EqualTo(@"/v7.0/workout/?user=502434&order_by=-start_datetime"));
+            Assert.That(result.FriendshipsLink.Href, Is.EqualTo(@"/v7.0/friendship/?from_user=502434"));
+            Assert.That(result.UserAchievementLink.Href, Is.EqualTo(@"/v7.0/user_achievement/?user=502434"));
+            Assert.That(result.DeactivationLink.Href, Is.EqualTo(@"/v7.0/user_deactivation/"));
+            Assert.That(result.DocumentationLink.Href, Is.EqualTo(@"https://www.mapmyapi.com/docs/User"));
+            Assert.That(result.Images.First().Id, Is.EqualTo(@"502434"));
+            Assert.That(result.Images.First().Name, Is.EqualTo(@"user_profile_photo"));
+            Assert.That(result.Images.First().Href, Is.EqualTo(@"/v7.0/user_profile_photo/502434/"));
         }
 	}
 }
