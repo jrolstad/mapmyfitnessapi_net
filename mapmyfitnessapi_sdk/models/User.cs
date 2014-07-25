@@ -46,9 +46,10 @@ namespace mapmyfitnessapi_sdk.models
         public List<Link> Images { get; set; }
 
         public Link DocumentationLink { get; set; }
+        public Link DeactivationLink { get; set; }
         public Link UserAchievementLink { get; set; }
         public Link FriendshipsLink { get; set; }
         public Link WorkoutsLink { get; set; }
-        
+        public Link SelfLink { get; set; }
     }
 }

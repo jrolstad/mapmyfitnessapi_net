@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -53,14 +54,88 @@ namespace mapmyfitnessapi_sdk.users
 
         private User Map(dynamic userData)
         {
-			return new User
+
+            var dateJoined = MapDateTime(userData.date_joined);
+            var lastLogin = MapDateTime(userData.last_login);
+            var birthDate = MapDateTime(userData.birthdate);
+
+            var documentationLink = new Link {Href = userData._links.documentation[0].href};
+            var deactivationLink = new Link { Href = userData._links.deactivation[0].href };
+            var userAchievementLink = new Link { Href = userData._links.user_achievements[0].href };
+            var friendshipLink = new Link { Href = userData._links.friendships[0].href };
+            var workoutLink = new Link { Href = userData._links.workouts[0].href };
+            var selfLink = new Link { Href = userData._links.self[0].href, Id = userData._links.self[0].id };
+
+            var imageLinks = MapLinks(userData._links.image);
+            var privacyLinks = MapLinks(userData._links.privacy);
+            var statisticLinks = MapLinks(userData._links.stats);
+
+            return new User
 			{ 
 				LastName = userData.last_name,
+                Weight = userData.weight,
+                Height = userData.height,
+                Hobbies = userData.hobbies,
+                DateJoined = dateJoined,
 				Id = userData.id,
 				ReceivePromotions = userData.communication.promotions,
 				ReceiveNewsletter = userData.communication.newsletter,
-				ReceiveSystemMessages = userData.communication.system_messages
+				ReceiveSystemMessages = userData.communication.system_messages,
+                FirstName = userData.first_name,
+                DisplayName = userData.display_name,
+                Introduction = userData.introduction,
+                DisplayMeasurementSystem = userData.display_measurement_system,
+                LastLogin = lastLogin,
+                GoalStatement = userData.goal_statement,
+                Email = userData.email,
+                Country = userData.location.country,
+                Region = userData.location.region,
+                Locality = userData.location.locality,
+                Address = userData.location.address,
+                UserName = userData.username,
+                TwitterSharingEnabled = userData.sharing.twitter,
+                FacebookSharingEnabled = userData.sharing.facebook,
+                LastInitial = userData.last_initial,
+                Gender = userData.gender,
+                TimeZone = userData.time_zone,
+                Birthdate = birthDate,
+                ProfileStatement = userData.profile_statement,
+                DocumentationLink = documentationLink,
+                DeactivationLink = deactivationLink,
+                UserAchievementLink = userAchievementLink,
+                FriendshipsLink = friendshipLink,
+                WorkoutsLink = workoutLink,
+                SelfLink = selfLink,
+                Images = imageLinks,
+                PrivacySettings = privacyLinks,
+                Statistics = statisticLinks
 			};
+        }
+
+        private static DateTime? MapDateTime(dynamic dateValue)
+        {
+            if (dateValue == null || string.IsNullOrWhiteSpace(dateValue.ToString()))
+                return null;
+
+            var date = DateTime.Parse(dateValue.ToString()).ToUniversalTime();
+
+            return date;
+        }
+
+        private static List<Link> MapLinks(dynamic imageData)
+        {
+            var images = new List<Link>();
+            foreach (var image in imageData)
+            {
+                var link = new Link
+                {
+                    Href = image.href, 
+                    Id = image.id, 
+                    Name = image.name
+                };
+                images.Add(link);
+            }
+            return images;
         }
     }
 }
