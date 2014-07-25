@@ -55,7 +55,7 @@ namespace mapmyfitnessapi_sdk.users
 
         public User Get(UserApiRequest request)
         {
-            using (var client = new HttpClient())
+            using (var client = _httpClientFactory.Create(_baseUrl))
             {
                 client.BaseAddress = _baseUrl;
                 client.DefaultRequestHeaders.Add("Api-Key", request.ApiKey);

@@ -53,7 +53,7 @@ namespace mapmyfitnessapi_sdk.unit.tests.users
             var api = new UserClient("http://foo", clientFactory);
 
             // Act
-            var result = api.GetAuthenticatedUser(request);
+            var result = api.Get(request);
 
             // Assert
             AssertRequestHeaders(clientFactory.LastClient, "someKey", "someToken");
