@@ -4,11 +4,13 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using mapmyfitnessapi_sdk.models;
 using System.Linq;
+using mapmyfitnessapi_sdk.services;
 
 namespace mapmyfitnessapi_sdk.users
 {
     public class UserClient
     {
+        private readonly MmfHttpClientFactory _httpClientFactory;
         private readonly Uri _baseUrl;
 
         public UserClient() : this("https://oauth2-api.mapmyapi.com")
@@ -16,14 +18,20 @@ namespace mapmyfitnessapi_sdk.users
 
         }
 
-        public UserClient(string baseUrl)
+        public UserClient(string baseUrl):this(baseUrl,new MmfHttpClientFactory())
+        {
+            
+        }
+
+        public UserClient(string baseUrl, MmfHttpClientFactory httpClientFactory)
         {
             _baseUrl = new Uri(baseUrl);
+            _httpClientFactory = httpClientFactory;
         }
 
         public User GetAuthenticatedUser(UserApiRequest request)
         {
-			using (var client = new HttpClient())
+            using (var client = _httpClientFactory.Create(_baseUrl))
 			{
 				client.BaseAddress = _baseUrl;
 				client.DefaultRequestHeaders.Add("Api-Key", request.ApiKey);

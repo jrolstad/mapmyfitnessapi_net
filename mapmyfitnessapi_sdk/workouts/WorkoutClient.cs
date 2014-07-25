@@ -4,26 +4,34 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using mapmyfitnessapi_sdk.models;
+using mapmyfitnessapi_sdk.services;
 
 namespace mapmyfitnessapi_sdk.workouts
 {
     public class WorkoutClient
     {
         private readonly Uri _baseUrl;
+        private MmfHttpClientFactory _httpClientFactory;
 
         public WorkoutClient() : this("https://oauth2-api.mapmyapi.com")
         {
 
         }
 
-        public WorkoutClient(string baseUrl)
+        public WorkoutClient(string baseUrl):this(baseUrl,new MmfHttpClientFactory())
+        {
+            
+        }
+
+        public WorkoutClient(string baseUrl, MmfHttpClientFactory httpClientFactory)
         {
             _baseUrl = new Uri(baseUrl);
+            _httpClientFactory = httpClientFactory;
         }
 
         public List<Workout> Get(WorkoutApiRequest request)
         {
-            using (var client = new HttpClient())
+            using (var client = _httpClientFactory.Create(_baseUrl))
             {
                 client.BaseAddress = _baseUrl;
                 client.DefaultRequestHeaders.Add("Api-Key", request.ApiKey);
