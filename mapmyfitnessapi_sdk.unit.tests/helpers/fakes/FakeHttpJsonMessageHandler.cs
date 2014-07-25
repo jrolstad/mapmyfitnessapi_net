@@ -11,7 +11,7 @@ namespace mapmyfitnessapi_sdk.unit.tests.helpers.fakes
     {
         private readonly HttpResponseMessage _response;
 
-        public static HttpMessageHandler GetHttpMessageHandler(string content, HttpStatusCode httpStatusCode)
+        public static HttpMessageHandler GetHttpMessageHandler(string content, HttpStatusCode httpStatusCode, string mediaType = "application/json")
         {
             var memStream = new MemoryStream();
 
@@ -21,7 +21,7 @@ namespace mapmyfitnessapi_sdk.unit.tests.helpers.fakes
             memStream.Position = 0;
 
             var httpContent = new StreamContent(memStream);
-            httpContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue("application/json");
+            httpContent.Headers.ContentType = new MediaTypeWithQualityHeaderValue(mediaType);
 
             var response = new HttpResponseMessage()
             {
