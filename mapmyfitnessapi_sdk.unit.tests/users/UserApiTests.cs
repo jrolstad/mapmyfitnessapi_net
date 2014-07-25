@@ -16,7 +16,7 @@ namespace mapmyfitnessapi_sdk.unit.tests
 				.WithAccessToken ("321a93d2329879543cb67c47c03e55f3c8e752b9")
 				.WithApiKey ("wpma9vemz3pfu8tyq3y85va29dx23ff6");
 
-			var api = new UserApi ();
+			var api = new UserClient ();
 
 			// Act
 			var result = api.GetAuthenticatedUser(request);
@@ -36,7 +36,7 @@ namespace mapmyfitnessapi_sdk.unit.tests
                 .WithApiKey("wpma9vemz3pfu8tyq3y85va29dx23ff6");
                 
 
-            var api = new UserApi();
+            var api = new UserClient();
 
             // Act
             var result = api.GetAuthenticatedUser(request);

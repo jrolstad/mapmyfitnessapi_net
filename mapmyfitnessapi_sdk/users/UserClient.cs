@@ -7,16 +7,16 @@ using System.Linq;
 
 namespace mapmyfitnessapi_sdk.users
 {
-    public class UserApi
+    public class UserClient
     {
         private readonly Uri _baseUrl;
 
-        public UserApi() : this("https://oauth2-api.mapmyapi.com")
+        public UserClient() : this("https://oauth2-api.mapmyapi.com")
         {
 
         }
 
-        public UserApi(string baseUrl)
+        public UserClient(string baseUrl)
         {
             _baseUrl = new Uri(baseUrl);
         }
@@ -45,7 +45,7 @@ namespace mapmyfitnessapi_sdk.users
 			}
         }
 
-        public User GetUser(UserApiRequest request)
+        public User Get(UserApiRequest request)
         {
             using (var client = new HttpClient())
             {
