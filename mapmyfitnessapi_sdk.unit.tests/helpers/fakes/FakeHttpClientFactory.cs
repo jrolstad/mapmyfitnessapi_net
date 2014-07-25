@@ -11,23 +11,29 @@ namespace mapmyfitnessapi_sdk.unit.tests.helpers.fakes
 
         private HttpStatusCode FakeStatusCode { get; set; }
 
+        public string FakeContentType { get; set; }
+
         public HttpClient LastClient { get; set; }
 
         public override HttpClient Create(Uri baseUri)
         {
-            var httpMessageHandler = FakeHttpJsonMessageHandler.GetHttpMessageHandler(FakeContent,FakeStatusCode);
-            
-            LastClient = new HttpClient(httpMessageHandler);
+            var httpMessageHandler = new FakeHttpMessageHandler(FakeContent,FakeStatusCode, FakeContentType);
+            var client = new HttpClient(httpMessageHandler);
 
-            return LastClient;
+            LastClient = client;
+
+            return client;
         }
 
         public FakeHttpClientFactory WithJsonResponse(string content, HttpStatusCode statusCode = HttpStatusCode.OK)
         {
             FakeContent = content;
             FakeStatusCode = statusCode;
+            FakeContentType = "application/json";
 
             return this;
         }
+
+        
     }
 }
