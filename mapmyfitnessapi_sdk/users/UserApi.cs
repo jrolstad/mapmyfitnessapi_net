@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Policy;
-using System.Threading.Tasks;
 using mapmyfitnessapi_sdk.models;
+using System.Linq;
 
 namespace mapmyfitnessapi_sdk.users
 {
@@ -49,7 +47,27 @@ namespace mapmyfitnessapi_sdk.users
 
         public User GetUser(UserApiRequest request)
         {
-			throw new NotImplementedException();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = _baseUrl;
+                client.DefaultRequestHeaders.Add("Api-Key", request.ApiKey);
+                client.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", request.AccessToken));
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var requestUri = string.Format("v7.0/user/{0}/",request.UserId);
+                var response = client.GetAsync(requestUri).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var userData = response.Content.ReadAsAsync<dynamic>().Result;
+                    var user = Map(userData);
+
+                    return user;
+                }
+
+                throw new HttpRequestException(string.Format("Http Status:{0}| Reason:{1}", response.StatusCode,
+                    response.ReasonPhrase));
+
+            }
         }
 
         private User Map(dynamic userData)
@@ -59,16 +77,16 @@ namespace mapmyfitnessapi_sdk.users
             var lastLogin = MapDateTime(userData.last_login);
             var birthDate = MapDateTime(userData.birthdate);
 
-            var documentationLink = new Link {Href = userData._links.documentation[0].href};
-            var deactivationLink = new Link { Href = userData._links.deactivation[0].href };
-            var userAchievementLink = new Link { Href = userData._links.user_achievements[0].href };
-            var friendshipLink = new Link { Href = userData._links.friendships[0].href };
-            var workoutLink = new Link { Href = userData._links.workouts[0].href };
-            var selfLink = new Link { Href = userData._links.self[0].href, Id = userData._links.self[0].id };
+            var documentationLink = MapLink(userData._links.documentation);
+            var deactivationLink = MapLink(userData._links.deactivation);
+            var userAchievementLink = MapLink(userData._links.user_achievements); 
+            var friendshipLink = MapLink(userData._links.friendships); 
+            var workoutLink = MapLink(userData._links.workouts); 
+            var selfLink = MapLink(userData._links.self);
 
-            var imageLinks = MapLinks(userData._links.image);
-            var privacyLinks = MapLinks(userData._links.privacy);
-            var statisticLinks = MapLinks(userData._links.stats);
+            var imageLinks = MapLinkCollection(userData._links.image);
+            var privacyLinks = MapLinkCollection(userData._links.privacy);
+            var statisticLinks = MapLinkCollection(userData._links.stats);
 
             return new User
 			{ 
@@ -122,20 +140,28 @@ namespace mapmyfitnessapi_sdk.users
             return date;
         }
 
-        private static List<Link> MapLinks(dynamic imageData)
+        private static List<Link> MapLinkCollection(dynamic linkData)
         {
-            var images = new List<Link>();
-            foreach (var image in imageData)
+            var links = new List<Link>();
+            foreach (var linkItem in linkData)
             {
                 var link = new Link
                 {
-                    Href = image.href, 
-                    Id = image.id, 
-                    Name = image.name
+                    Href = linkItem.href, 
+                    Id = linkItem.id, 
+                    Name = linkItem.name
                 };
-                images.Add(link);
+                links.Add(link);
             }
-            return images;
+            return links;
+        }
+
+        private static Link MapLink(dynamic linkData)
+        {
+            List<Link> links = MapLinkCollection(linkData);
+            var link = links.FirstOrDefault();
+
+            return link;
         }
     }
 }
