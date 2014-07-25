@@ -24,36 +24,43 @@ namespace mapmyfitnessapi_sdk.users
 
         public User GetAuthenticatedUser(UserApiRequest request)
         {
-            throw new NotImplementedException();
+			using (var client = new HttpClient())
+			{
+				client.BaseAddress = _baseUrl;
+				client.DefaultRequestHeaders.Add("Api-Key", request.ApiKey);
+				client.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", request.AccessToken));
+				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+				var response = client.GetAsync("v7.0/user/self/").Result;
+				if (response.IsSuccessStatusCode)
+				{
+					var userData = response.Content.ReadAsAsync<dynamic>().Result;
+					var user = Map(userData);
+
+					return user;
+				}
+
+				throw new HttpRequestException(string.Format("Http Status:{0}| Reason:{1}", response.StatusCode,
+					response.ReasonPhrase));
+
+			}
         }
 
         public User GetUser(UserApiRequest request)
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = _baseUrl;
-                client.DefaultRequestHeaders.Add("Api-Key", request.ApiKey);
-                client.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", request.AccessToken));
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                var response = client.GetAsync("v7.0/user/self/").Result;
-                if (response.IsSuccessStatusCode)
-                {
-                    var userData = response.Content.ReadAsAsync<dynamic>().Result;
-                    var user = Map(userData);
-
-                    return user;
-                }
-
-                throw new HttpRequestException(string.Format("Http Status:{0}| Reason:{1}", response.StatusCode,
-                    response.ReasonPhrase));
-
-            }
+			throw new NotImplementedException();
         }
 
         private User Map(dynamic userData)
         {
-            return new User();
+			return new User
+			{ 
+				LastName = userData.last_name,
+				Id = userData.id,
+				ReceivePromotions = userData.communication.promotions,
+				ReceiveNewsletter = userData.communication.newsletter,
+				ReceiveSystemMessages = userData.communication.system_messages
+			};
         }
     }
 }
