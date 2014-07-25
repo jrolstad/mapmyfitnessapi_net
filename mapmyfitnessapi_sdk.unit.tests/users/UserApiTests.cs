@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿using mapmyfitnessapi_sdk.services;
+using mapmyfitnessapi_sdk.unit.tests.helpers;
+using mapmyfitnessapi_sdk.unit.tests.helpers.fakes;
+using NUnit.Framework;
 using System;
 using mapmyfitnessapi_sdk.users;
 
@@ -11,12 +14,16 @@ namespace mapmyfitnessapi_sdk.unit.tests
 		public void GetAuthenticatedUser_WhenCalled_GetsTheCurrentUser ()
 		{
 			// Arrange
-			var request = new UserApiRequest ();
+		    var request = new UserApiRequest();
 			request
-				.WithAccessToken ("321a93d2329879543cb67c47c03e55f3c8e752b9")
-				.WithApiKey ("wpma9vemz3pfu8tyq3y85va29dx23ff6");
+				.WithAccessToken ("someToken")
+				.WithApiKey ("someKey");
 
-			var api = new UserClient ();
+		    var responseJson = TestFileReader.ReadFile("mapmyfitnessapi_sdk.unit.tests.users.userData.json");
+		    var clientFactory = new FakeHttpClientFactory()
+                .WithJsonResponse(responseJson);
+            
+		    var api = new UserClient("http://foo", clientFactory);
 
 			// Act
 			var result = api.GetAuthenticatedUser(request);
@@ -32,11 +39,14 @@ namespace mapmyfitnessapi_sdk.unit.tests
             var request = new UserApiRequest();
             request
                 .WithUserId(502434)
-                .WithAccessToken("321a93d2329879543cb67c47c03e55f3c8e752b9")
-                .WithApiKey("wpma9vemz3pfu8tyq3y85va29dx23ff6");
-                
+                .WithAccessToken("someToken")
+                .WithApiKey("someKey");
 
-            var api = new UserClient();
+            var responseJson = TestFileReader.ReadFile("mapmyfitnessapi_sdk.unit.tests.users.userData.json");
+            var clientFactory = new FakeHttpClientFactory()
+                .WithJsonResponse(responseJson);
+
+            var api = new UserClient("http://foo", clientFactory);
 
             // Act
             var result = api.GetAuthenticatedUser(request);

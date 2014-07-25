@@ -1,0 +1,116 @@
+﻿{
+    "last_name": "Rolstad",
+    "weight": 83.00740371,
+    "communication": {
+        "promotions": true,
+        "newsletter": true,
+        "system_messages": false
+    },
+    "height": 1.8796,
+    "hobbies": "",
+    "id": 502434,
+    "date_joined": "2008-05-06T18:39:07+00:00",
+    "first_name": "Josh",
+    "display_name": "Josh Rolstad",
+    "introduction": "",
+    "display_measurement_system": "imperial",
+    "last_login": "2014-02-22T02:39:26+00:00",
+    "goal_statement": null,
+    "_links": {
+        "stats": [{
+            "href": "\/v7.0\/user_stats\/502434\/?aggregate_by_period=month",
+            "id": "502434",
+            "name": "month"
+        }, {
+            "href": "\/v7.0\/user_stats\/502434\/?aggregate_by_period=year",
+            "id": "502434",
+            "name": "year"
+        }, {
+            "href": "\/v7.0\/user_stats\/502434\/?aggregate_by_period=day",
+            "id": "502434",
+            "name": "day"
+        }, {
+            "href": "\/v7.0\/user_stats\/502434\/?aggregate_by_period=week",
+            "id": "502434",
+            "name": "week"
+        }, {
+            "href": "\/v7.0\/user_stats\/502434\/?aggregate_by_period=lifetime",
+            "id": "502434",
+            "name": "lifetime"
+        }],
+        "privacy": [{
+            "href": "\/v7.0\/privacy_option\/1\/",
+            "id": "1",
+            "name": "profile"
+        }, {
+            "href": "\/v7.0\/privacy_option\/1\/",
+            "id": "1",
+            "name": "workout"
+        }, {
+            "href": "\/v7.0\/privacy_option\/0\/",
+            "id": "0",
+            "name": "activity_feed"
+        }, {
+            "href": "\/v7.0\/privacy_option\/0\/",
+            "id": "0",
+            "name": "bodymass"
+        }, {
+            "href": "\/v7.0\/privacy_option\/0\/",
+            "id": "0",
+            "name": "food_log"
+        }, {
+            "href": "\/v7.0\/privacy_option\/3\/",
+            "id": "3",
+            "name": "email_search"
+        }, {
+            "href": "\/v7.0\/privacy_option\/3\/",
+            "id": "3",
+            "name": "route"
+        }, {
+            "href": "\/v7.0\/privacy_option\/0\/",
+            "id": "0",
+            "name": "sleep"
+        }],
+        "image": [{
+            "href": "\/v7.0\/user_profile_photo\/502434\/",
+            "id": "502434",
+            "name": "user_profile_photo"
+        }],
+        "documentation": [{
+            "href": "https:\/\/www.mapmyapi.com\/docs\/User"
+        }],
+        "deactivation": [{
+            "href": "\/v7.0\/user_deactivation\/"
+        }],
+        "user_achievements": [{
+            "href": "\/v7.0\/user_achievement\/?user=502434"
+        }],
+        "friendships": [{
+            "href": "\/v7.0\/friendship\/?from_user=502434"
+        }],
+        "workouts": [{
+            "href": "\/v7.0\/workout\/?user=502434&order_by=-start_datetime"
+        }],
+        "self": [{
+            "href": "\/v7.0\/user\/502434\/",
+            "id": "502434"
+        }]
+    },
+    "email": "jrolstad@gmail.com",
+    "location": {
+        "country": "US",
+        "region": "WA",
+        "locality": "Seattle",
+        "address": "1918 8th Ave"
+    },
+    "username": "jrolstad",
+    "sharing": {
+        "twitter": false,
+        "facebook": false
+    },
+    "last_initial": "R.",
+    "gender": "M",
+    "time_zone": "America\/Los_Angeles",
+    "birthdate": "1975-03-30",
+    "profile_statement": ""
+}
