@@ -11,6 +11,11 @@ namespace mapmyfitnessapi_sdk.unit.tests.helpers.fakes
     {
         private readonly HttpResponseMessage _response;
 
+        public FakeHttpMessageHandler()
+        {
+            
+        }
+
         public FakeHttpMessageHandler(string content, HttpStatusCode httpStatusCode, string mediaType)
         {
             var httpContent = CreateHttpContent(content, mediaType);

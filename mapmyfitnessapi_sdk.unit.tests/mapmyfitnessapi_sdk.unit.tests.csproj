@@ -46,8 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="helpers\fakes\FakeHttpClientFactory.cs" />
+    <Compile Include="helpers\fakes\FakeHttpClient.cs" />
     <Compile Include="helpers\fakes\FakeHttpMessageHandler.cs" />
+    <Compile Include="helpers\TestCompositionRoot.cs" />
     <Compile Include="helpers\TestFileReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SandboxTests.cs" />

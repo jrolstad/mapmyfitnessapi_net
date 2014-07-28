@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using mapmyfitnessapi_sdk.models;
 using mapmyfitnessapi_sdk.unit.tests.helpers;
@@ -22,17 +23,15 @@ namespace mapmyfitnessapi_sdk.unit.tests.users
 				.WithApiKey ("someKey");
 
 		    var responseJson = TestFileReader.ReadFile("mapmyfitnessapi_sdk.unit.tests.users.userData.json");
+		    var httpClient = FakeHttpClient.WithJsonResponse(responseJson);
 
-		    var clientFactory = new FakeHttpClientFactory()
-                .WithJsonResponse(responseJson);
-            
-		    var api = new UserClient("http://foo", clientFactory);
+		    var api = TestCompositionRoot.GetUserClient(httpClient);
 
 			// Act
 			var result = api.GetAuthenticatedUser(request);
 
 			// Assert
-            AssertRequestHeaders(clientFactory.LastClient,"someKey","someToken");
+            AssertRequestHeaders(httpClient, "someKey", "someToken");
 		    AssertUserDataIsFromJson(result);
 		}
 
@@ -47,16 +46,15 @@ namespace mapmyfitnessapi_sdk.unit.tests.users
                 .WithApiKey("someKey");
 
             var responseJson = TestFileReader.ReadFile("mapmyfitnessapi_sdk.unit.tests.users.userData.json");
-            var clientFactory = new FakeHttpClientFactory()
-                .WithJsonResponse(responseJson);
+            var httpClient = FakeHttpClient.WithJsonResponse(responseJson);
 
-            var api = new UserClient("http://foo", clientFactory);
+            var api = TestCompositionRoot.GetUserClient(httpClient);
 
             // Act
             var result = api.Get(request);
 
             // Assert
-            AssertRequestHeaders(clientFactory.LastClient, "someKey", "someToken");
+            AssertRequestHeaders(httpClient, "someKey", "someToken");
             AssertUserDataIsFromJson(result);
         }
 
