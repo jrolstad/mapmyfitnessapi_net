@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -68,7 +69,7 @@ namespace mapmyfitnessapi_sdk.workouts
         {
             var workouts = new List<Workout>();
 
-            foreach (var item in workoutData._embedded)
+            foreach (var item in workoutData._embedded.workouts)
             {
                 var workout = MapWorkout(item);
                 workouts.Add(workout);
@@ -80,14 +81,53 @@ namespace mapmyfitnessapi_sdk.workouts
         private Workout MapWorkout(dynamic item)
         {
             var startDateTime = MapDateTime(item.start_datetime);
+            var updatedDateTime = MapDateTime(item.updated_datetime);
+            var createdDateTime = MapDateTime(item.created_datetime);
+
             var selfLink = MapLink(item._links.self);
+            var workoutId = Int32.Parse(selfLink.Id);
+
+            var routeLink = MapLink(item._links.route);
+            var routeId = Int32.Parse(routeLink.Id);
+
+            var activityTypeLink = MapLink(item._links.activity_type);
+            var activityTypeId = Int32.Parse(activityTypeLink.Id);
+
+            var userLink = MapLink(item._links.user);
+            var userId = Int32.Parse(userLink.Id);
+
+            var privacyLink = MapLink(item._links.privacy);
+            var privacyId = Int32.Parse(privacyLink.Id);
 
             var workout = new Workout
             {
                StartDateTime = startDateTime,
+               UpdatedDateTime = updatedDateTime,
+               CreatedDateTime = createdDateTime,
+               Notes = item.notes,
+               ReferenceKey = item.reference_key,
+               StartLocaleTimezone = item.start_locale_timezone,
+               HasTimeSeries = item.has_time_series,
+               IsVerified = item.is_verified,
+               ActiveTime = item.aggregates.active_time_total,
+               Distance = item.aggregates.distance_total,
+               MaxSpeed = item.aggregates.speed_max,
+               MinSpeed = item.aggregates.speed_min,
+               AverageSpeed = item.aggregates.speed_avg,
+               ElapsedTime = item.aggregates.elapsed_time_total,
+               MetabolicEnergy = item.aggregates.metabolic_energy_total,
+               Source = item.source,
                Name = item.name,
-               Id = selfLink.Id,
-               SelfLink = selfLink
+               Id = workoutId,
+               SelfLink = selfLink,
+               Route =routeId,
+               RouteLink = routeLink,
+               ActivityType = activityTypeId,
+               ActivityTypeLink = activityTypeLink,
+               User = userId,
+               UserLink = userLink,
+               Privacy = privacyId,
+               PrivacyLink = privacyLink
             };
 
             return workout;

@@ -3,6 +3,7 @@ using System.Net.Http;
 using mapmyfitnessapi_sdk.services;
 using mapmyfitnessapi_sdk.unit.tests.helpers.fakes;
 using mapmyfitnessapi_sdk.users;
+using mapmyfitnessapi_sdk.workouts;
 
 namespace mapmyfitnessapi_sdk.unit.tests.helpers
 {
@@ -11,9 +12,17 @@ namespace mapmyfitnessapi_sdk.unit.tests.helpers
         public static UserClient GetUserClient(HttpClient httpClient)
         {
             var factory = new FakeHttpClientFactory(httpClient);
-            var userClient = new UserClient("http://foo",factory);
+            var client = new UserClient("http://foo",factory);
 
-            return userClient;
+            return client;
+        }
+
+        public static WorkoutClient GetWorkoutClient(FakeHttpClient httpClient)
+        {
+            var factory = new FakeHttpClientFactory(httpClient);
+            var client = new WorkoutClient("http://foo", factory);
+
+            return client;
         }
 
         private class FakeHttpClientFactory : MmfHttpClientFactory
@@ -31,6 +40,8 @@ namespace mapmyfitnessapi_sdk.unit.tests.helpers
                 return _httpClient;
             }
         }
+
+        
     }
 
    

@@ -32,6 +32,10 @@ namespace mapmyfitnessapi_sdk.models
 
         public double AverageSpeed { get; set; }
 
+        public double MaxSpeed { get; set; }
+
+        public double MinSpeed { get; set; }
+
         public double ElapsedTime { get; set; }
 
         public double MetabolicEnergy { get; set; }

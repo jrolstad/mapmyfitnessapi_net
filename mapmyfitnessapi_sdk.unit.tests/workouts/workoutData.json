@@ -1,0 +1,311 @@
+﻿{
+    "_links": {
+        "self": [{
+            "href": "\/v7.0\/workout\/?started_after=2014-07-21&limit=20&user=502434&offset=0"
+        }],
+        "documentation": [{
+            "href": "https:\/\/www.mapmyapi.com\/docs\/Workout"
+        }]
+    },
+    "_embedded": {
+        "workouts": [{
+            "start_datetime": "2014-07-22T13:21:40+00:00",
+            "name": "Run \/ Jog on July 22, 2014",
+            "updated_datetime": "2014-07-22T15:01:43+00:00",
+            "created_datetime": "2014-07-22T16:01:43+00:00",
+            "notes": "something interesting",
+            "reference_key": "774969701",
+            "start_locale_timezone": "America\/Los_Angeles",
+            "source": "Unknown Garmin Device(006-B1345-00)",
+            "_links": {
+                "self": [{
+                    "href": "\/v7.0\/workout\/657440399\/",
+                    "id": "657440399"
+                }],
+                "route": [{
+                    "href": "\/v7.0\/route\/480631396\/",
+                    "id": "480631396"
+                }],
+                "activity_type": [{
+                    "href": "\/v7.0\/activity_type\/16\/",
+                    "id": "16"
+                }],
+                "user": [{
+                    "href": "\/v7.0\/user\/502434\/",
+                    "id": "502434"
+                }],
+                "privacy": [{
+                    "href": "\/v7.0\/privacy_option\/1\/",
+                    "id": "1"
+                }]
+            },
+            "has_time_series": true,
+            "is_verified": true,
+            "aggregates": {
+                "active_time_total": 3390.0,
+                "distance_total": 11341.99668096,
+                "speed_max": 5.293981792,
+                "speed_min": 0.3000000502,
+                "speed_avg": 3.3460005216,
+                "elapsed_time_total": 3720.0,
+                "metabolic_energy_total": 4309520.0
+            }
+        }, {
+            "start_datetime": "2014-07-23T13:00:51+00:00",
+            "name": "Run \/ Jog on July 23, 2014",
+            "updated_datetime": "2014-07-23T14:14:48+00:00",
+            "created_datetime": "2014-07-23T14:14:48+00:00",
+            "notes": "",
+            "reference_key": "775054852",
+            "start_locale_timezone": "America\/Los_Angeles",
+            "source": "Unknown Garmin Device(006-B1345-00)",
+            "_links": {
+                "self": [{
+                    "href": "\/v7.0\/workout\/658886417\/",
+                    "id": "658886417"
+                }],
+                "route": [{
+                    "href": "\/v7.0\/route\/481678306\/",
+                    "id": "481678306"
+                }],
+                "activity_type": [{
+                    "href": "\/v7.0\/activity_type\/16\/",
+                    "id": "16"
+                }],
+                "user": [{
+                    "href": "\/v7.0\/user\/502434\/",
+                    "id": "502434"
+                }],
+                "privacy": [{
+                    "href": "\/v7.0\/privacy_option\/1\/",
+                    "id": "1"
+                }]
+            },
+            "has_time_series": true,
+            "is_verified": true,
+            "aggregates": {
+                "active_time_total": 2385.0,
+                "distance_total": 8683.3764864,
+                "speed_max": 42.681009888,
+                "speed_min": 0.3000000502,
+                "speed_avg": 3.6419991168,
+                "elapsed_time_total": 2548.0,
+                "metabolic_energy_total": 3230048.0
+            }
+        }, {
+            "start_datetime": "2014-07-24T13:14:11+00:00",
+            "name": "Run around Queen Anne; ran past derailed oil train",
+            "updated_datetime": "2014-07-24T15:12:14+00:00",
+            "created_datetime": "2014-07-24T15:07:38+00:00",
+            "notes": "",
+            "reference_key": "775142052",
+            "start_locale_timezone": "America\/Los_Angeles",
+            "source": "Unknown Garmin Device(006-B1345-00)",
+            "_links": {
+                "self": [{
+                    "href": "\/v7.0\/workout\/660380483\/",
+                    "id": "660380483"
+                }],
+                "route": [{
+                    "href": "\/v7.0\/route\/482743226\/",
+                    "id": "482743226"
+                }],
+                "activity_type": [{
+                    "href": "\/v7.0\/activity_type\/16\/",
+                    "id": "16"
+                }],
+                "user": [{
+                    "href": "\/v7.0\/user\/502434\/",
+                    "id": "502434"
+                }],
+                "privacy": [{
+                    "href": "\/v7.0\/privacy_option\/1\/",
+                    "id": "1"
+                }]
+            },
+            "has_time_series": true,
+            "is_verified": true,
+            "aggregates": {
+                "active_time_total": 4644.0,
+                "distance_total": 14946.26740992,
+                "speed_max": 17.81499104,
+                "speed_min": 0.3000000502,
+                "speed_avg": 3.219000928,
+                "elapsed_time_total": 4742.0,
+                "metabolic_energy_total": 5635848.0
+            }
+        }, {
+            "start_datetime": "2014-07-26T01:18:00+00:00",
+            "name": "Evening ride with Liam",
+            "updated_datetime": "2014-07-26T01:41:25+00:00",
+            "created_datetime": "2014-07-26T01:40:42+00:00",
+            "notes": "",
+            "reference_key": "775271908",
+            "start_locale_timezone": "America\/Los_Angeles",
+            "source": "Unknown Garmin Device(006-B1345-00)",
+            "_links": {
+                "self": [{
+                    "href": "\/v7.0\/workout\/662471191\/",
+                    "id": "662471191"
+                }],
+                "route": [{
+                    "href": "\/v7.0\/route\/484236486\/",
+                    "id": "484236486"
+                }],
+                "activity_type": [{
+                    "href": "\/v7.0\/activity_type\/11\/",
+                    "id": "11"
+                }],
+                "user": [{
+                    "href": "\/v7.0\/user\/502434\/",
+                    "id": "502434"
+                }],
+                "privacy": [{
+                    "href": "\/v7.0\/privacy_option\/1\/",
+                    "id": "1"
+                }]
+            },
+            "has_time_series": true,
+            "is_verified": false,
+            "aggregates": {
+                "active_time_total": 1134.0,
+                "distance_total": 2977.2864,
+                "speed_max": 6.518022016,
+                "speed_min": 0.3000000502,
+                "speed_avg": 2.6241248,
+                "steps_total": 0.0,
+                "elapsed_time_total": 1080.0,
+                "metabolic_energy_total": 481160.0
+            }
+        }, {
+            "start_datetime": "2014-07-27T12:34:48+00:00",
+            "name": "Run to Burke Gilman Playground and back",
+            "updated_datetime": "2014-07-27T15:28:05+00:00",
+            "created_datetime": "2014-07-27T15:25:33+00:00",
+            "notes": "",
+            "reference_key": "775398890",
+            "start_locale_timezone": "America\/Los_Angeles",
+            "source": "Unknown Garmin Device(006-B1345-00)",
+            "_links": {
+                "self": [{
+                    "href": "\/v7.0\/workout\/664305321\/",
+                    "id": "664305321"
+                }],
+                "route": [{
+                    "href": "\/v7.0\/route\/485604570\/",
+                    "id": "485604570"
+                }],
+                "activity_type": [{
+                    "href": "\/v7.0\/activity_type\/16\/",
+                    "id": "16"
+                }],
+                "user": [{
+                    "href": "\/v7.0\/user\/502434\/",
+                    "id": "502434"
+                }],
+                "privacy": [{
+                    "href": "\/v7.0\/privacy_option\/1\/",
+                    "id": "1"
+                }]
+            },
+            "has_time_series": true,
+            "is_verified": true,
+            "aggregates": {
+                "active_time_total": 8530.0,
+                "distance_total": 26631.424512,
+                "speed_max": 7.099978688,
+                "speed_min": 0.3000000502,
+                "speed_avg": 3.1220021888,
+                "elapsed_time_total": 8638.0,
+                "metabolic_energy_total": 10024864.0
+            }
+        }, {
+            "start_datetime": "2014-07-28T00:58:00+00:00",
+            "name": "Ride through Old Poplar Way with Liam",
+            "updated_datetime": "2014-07-28T01:45:36+00:00",
+            "created_datetime": "2014-07-28T01:43:54+00:00",
+            "notes": "",
+            "reference_key": "775443529",
+            "start_locale_timezone": "America\/Los_Angeles",
+            "source": "Unknown Garmin Device(006-B1345-00)",
+            "_links": {
+                "self": [{
+                    "href": "\/v7.0\/workout\/664978355\/",
+                    "id": "664978355"
+                }],
+                "route": [{
+                    "href": "\/v7.0\/route\/486120070\/",
+                    "id": "486120070"
+                }],
+                "activity_type": [{
+                    "href": "\/v7.0\/activity_type\/11\/",
+                    "id": "11"
+                }],
+                "user": [{
+                    "href": "\/v7.0\/user\/502434\/",
+                    "id": "502434"
+                }],
+                "privacy": [{
+                    "href": "\/v7.0\/privacy_option\/1\/",
+                    "id": "1"
+                }]
+            },
+            "has_time_series": true,
+            "is_verified": true,
+            "aggregates": {
+                "active_time_total": 1182.0,
+                "distance_total": 2912.91264,
+                "speed_max": 4.965988544,
+                "speed_min": 0.3000000502,
+                "speed_avg": 2.4631904,
+                "steps_total": 0.0,
+                "elapsed_time_total": 1140.0,
+                "metabolic_energy_total": 317984.0
+            }
+        }, {
+            "start_datetime": "2014-07-28T01:24:00+00:00",
+            "name": "Ride to 236th & back with Kenzie",
+            "updated_datetime": "2014-07-28T04:08:15+00:00",
+            "created_datetime": "2014-07-28T01:43:53+00:00",
+            "notes": "",
+            "reference_key": "775445080",
+            "start_locale_timezone": "America\/Los_Angeles",
+            "source": "Unknown Garmin Device(006-B1345-00)",
+            "_links": {
+                "self": [{
+                    "href": "\/v7.0\/workout\/664978339\/",
+                    "id": "664978339"
+                }],
+                "route": [{
+                    "href": "\/v7.0\/route\/486120068\/",
+                    "id": "486120068"
+                }],
+                "activity_type": [{
+                    "href": "\/v7.0\/activity_type\/11\/",
+                    "id": "11"
+                }],
+                "user": [{
+                    "href": "\/v7.0\/user\/502434\/",
+                    "id": "502434"
+                }],
+                "privacy": [{
+                    "href": "\/v7.0\/privacy_option\/1\/",
+                    "id": "1"
+                }]
+            },
+            "has_time_series": true,
+            "is_verified": true,
+            "aggregates": {
+                "active_time_total": 990.0,
+                "distance_total": 1190.91456,
+                "speed_max": 2.2049979776,
+                "speed_min": 0.3000000502,
+                "speed_avg": 1.2025376,
+                "steps_total": 0.0,
+                "elapsed_time_total": 960.0,
+                "metabolic_energy_total": 200832.0
+            }
+        }]
+    },
+    "total_count": 7
+}

@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace mapmyfitnessapi_sdk.unit.tests.users
 {
 	[TestFixture]
-	public class UserApiTests
+	public class UserClientTests
 	{
 		[Test]
 		public void GetAuthenticatedUser_WhenCalled_GetsTheCurrentUser ()
