@@ -46,7 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="authentication\AuthenticationApi.cs" />
+    <Compile Include="authentication\AuthenticationClient.cs" />
     <Compile Include="authentication\AuthenticationApiRequest.cs" />
     <Compile Include="models\AuthenticationDetail.cs" />
     <Compile Include="models\Link.cs" />

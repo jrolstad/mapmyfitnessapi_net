@@ -1,6 +1,6 @@
 ﻿namespace mapmyfitnessapi_sdk.authentication
 {
-    public class AuthenticationApiRequest
+    public class AuthenticationApiRequest:MapMyFitnessApiRequest
     {
         public string ClientId { get; set; }
 
