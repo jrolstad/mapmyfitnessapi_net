@@ -39,30 +39,52 @@ namespace mapmyfitnessapi_sdk.workouts
                 client.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", request.AccessToken));
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var requestUri = string.Format("v7.0/workout/?user={0}", request.UserId);
+                var requestUri = MapRequestToUrlParameters(request);
 
-                if (request.ActivityType.HasValue)
-                    requestUri += string.Format("&activity_type={0}", request.ActivityType);
+                var workouts =  GetWorkouts(client, requestUri);
 
-                if (request.StartedAfter.HasValue)
-                    requestUri += string.Format("&started_after={0:u}", request.StartedAfter);
+                return workouts;
+            }
+        }
 
-                if (request.StartedBefore.HasValue)
-                    requestUri += string.Format("&started_before={0:u}", request.StartedAfter);
+        private static string MapRequestToUrlParameters(WorkoutApiRequest request)
+        {
+            var requestUri = string.Format("v7.0/workout/?user={0}", request.UserId);
 
-                var response = client.GetAsync(requestUri).Result;
-                if (response.IsSuccessStatusCode)
+            if (request.ActivityType.HasValue)
+                requestUri += string.Format("&activity_type={0}", request.ActivityType);
+
+            if (request.StartedAfter.HasValue)
+                requestUri += string.Format("&started_after={0:u}", request.StartedAfter);
+
+            if (request.StartedBefore.HasValue)
+                requestUri += string.Format("&started_before={0:u}", request.StartedAfter);
+            return requestUri;
+        }
+
+        private List<Workout> GetWorkouts(HttpClient client, string requestUri)
+        {
+            var response = client.GetAsync(requestUri).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var workoutData = response.Content.ReadAsAsync<dynamic>().Result;
+                var workouts = Map(workoutData);
+
+                var nextLink = MapLink(workoutData._links.next);
+
+                if (nextLink != null)
                 {
-                    var workoutData = response.Content.ReadAsAsync<dynamic>().Result;
-                    var workouts = Map(workoutData);
-
-                    return workouts;
+                    var nextWorkouts = GetWorkouts(client, nextLink.Href);
+                    workouts.AddRange(nextWorkouts);
                 }
 
-                throw new HttpRequestException(string.Format("Http Status:{0}| Reason:{1}", response.StatusCode,
-                    response.ReasonPhrase));
-
+                return workouts;
             }
+
+            
+
+            throw new HttpRequestException(string.Format("Http Status:{0}| Reason:{1}", response.StatusCode,
+                response.ReasonPhrase));
         }
 
         private List<Workout> Map(dynamic workoutData)
@@ -80,57 +102,69 @@ namespace mapmyfitnessapi_sdk.workouts
 
         private Workout MapWorkout(dynamic item)
         {
-            var startDateTime = MapDateTime(item.start_datetime);
-            var updatedDateTime = MapDateTime(item.updated_datetime);
-            var createdDateTime = MapDateTime(item.created_datetime);
-
+        
             var selfLink = MapLink(item._links.self);
             var workoutId = Int32.Parse(selfLink.Id);
 
-            var routeLink = MapLink(item._links.route);
-            var routeId = Int32.Parse(routeLink.Id);
-
-            var activityTypeLink = MapLink(item._links.activity_type);
-            var activityTypeId = Int32.Parse(activityTypeLink.Id);
-
-            var userLink = MapLink(item._links.user);
-            var userId = Int32.Parse(userLink.Id);
-
-            var privacyLink = MapLink(item._links.privacy);
-            var privacyId = Int32.Parse(privacyLink.Id);
-
-            var workout = new Workout
+            try
             {
-               StartDateTime = startDateTime,
-               UpdatedDateTime = updatedDateTime,
-               CreatedDateTime = createdDateTime,
-               Notes = item.notes,
-               ReferenceKey = item.reference_key,
-               StartLocaleTimezone = item.start_locale_timezone,
-               HasTimeSeries = item.has_time_series,
-               IsVerified = item.is_verified,
-               ActiveTime = item.aggregates.active_time_total,
-               Distance = item.aggregates.distance_total,
-               MaxSpeed = item.aggregates.speed_max,
-               MinSpeed = item.aggregates.speed_min,
-               AverageSpeed = item.aggregates.speed_avg,
-               ElapsedTime = item.aggregates.elapsed_time_total,
-               MetabolicEnergy = item.aggregates.metabolic_energy_total,
-               Source = item.source,
-               Name = item.name,
-               Id = workoutId,
-               SelfLink = selfLink,
-               Route =routeId,
-               RouteLink = routeLink,
-               ActivityType = activityTypeId,
-               ActivityTypeLink = activityTypeLink,
-               User = userId,
-               UserLink = userLink,
-               Privacy = privacyId,
-               PrivacyLink = privacyLink
-            };
+                var startDateTime = MapDateTime(item.start_datetime);
+                var updatedDateTime = MapDateTime(item.updated_datetime);
+                var createdDateTime = MapDateTime(item.created_datetime);
 
-            return workout;
+                var routeLink = MapLink(item._links.route);
+                var routeId = routeLink != null ? Int32.Parse(routeLink.Id):null;
+
+                var activityTypeLink = MapLink(item._links.activity_type);
+                var activityTypeId = Int32.Parse(activityTypeLink.Id);
+
+                var userLink = MapLink(item._links.user);
+                var userId = Int32.Parse(userLink.Id);
+
+                var privacyLink = MapLink(item._links.privacy);
+                var privacyId = Int32.Parse(privacyLink.Id);
+
+
+                var workout = new Workout
+                {
+                    StartDateTime = startDateTime,
+                    UpdatedDateTime = updatedDateTime,
+                    CreatedDateTime = createdDateTime,
+                    Notes = item.notes,
+                    ReferenceKey = item.reference_key,
+                    StartLocaleTimezone = item.start_locale_timezone,
+                    HasTimeSeries = item.has_time_series,
+                    IsVerified = item.is_verified,
+                    ActiveTime = item.aggregates.active_time_total,
+                    Distance = item.aggregates.distance_total,
+                    MaxSpeed = item.aggregates.speed_max,
+                    MinSpeed = item.aggregates.speed_min,
+                    AverageSpeed = item.aggregates.speed_avg,
+                    ElapsedTime = item.aggregates.elapsed_time_total,
+                    MetabolicEnergy = item.aggregates.metabolic_energy_total,
+                    Source = item.source,
+                    Name = item.name,
+                    Id = workoutId,
+                    SelfLink = selfLink,
+                    Route = routeId,
+                    RouteLink = routeLink,
+                    ActivityType = activityTypeId,
+                    ActivityTypeLink = activityTypeLink,
+                    User = userId,
+                    UserLink = userLink,
+                    Privacy = privacyId,
+                    PrivacyLink = privacyLink
+                };
+
+                return workout;
+            }
+            catch (Exception exception)
+            {
+                var message = string.Format("Unable to map workout {0}", workoutId);
+
+                throw new ApplicationException(message, exception);
+            }
+           
         }
 
         private static DateTime? MapDateTime(dynamic dateValue)
@@ -145,6 +179,9 @@ namespace mapmyfitnessapi_sdk.workouts
 
         private static List<Link> MapLinkCollection(dynamic linkData)
         {
+            if(linkData == null)
+                return new List<Link>();
+
             var links = new List<Link>();
             foreach (var linkItem in linkData)
             {
@@ -161,6 +198,7 @@ namespace mapmyfitnessapi_sdk.workouts
 
         private static Link MapLink(dynamic linkData)
         {
+           
             List<Link> links = MapLinkCollection(linkData);
             var link = links.FirstOrDefault();
 

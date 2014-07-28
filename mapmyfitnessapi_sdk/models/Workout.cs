@@ -24,25 +24,25 @@ namespace mapmyfitnessapi_sdk.models
 
         public bool IsVerified { get; set; }
 
-        public double ActiveTime { get; set; }
+        public double? ActiveTime { get; set; }
 
-        public double Distance { get; set; }
+        public double? Distance { get; set; }
 
-        public double Steps { get; set; }
+        public double? Steps { get; set; }
 
-        public double AverageSpeed { get; set; }
+        public double? AverageSpeed { get; set; }
 
-        public double MaxSpeed { get; set; }
+        public double? MaxSpeed { get; set; }
 
-        public double MinSpeed { get; set; }
+        public double? MinSpeed { get; set; }
 
-        public double ElapsedTime { get; set; }
+        public double? ElapsedTime { get; set; }
 
-        public double MetabolicEnergy { get; set; }
+        public double? MetabolicEnergy { get; set; }
 
         public int Id { get; set; }
 
-        public int Route { get; set; }
+        public int? Route { get; set; }
 
         public int ActivityType { get; set; }
 

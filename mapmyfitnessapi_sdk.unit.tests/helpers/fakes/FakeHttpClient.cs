@@ -17,6 +17,5 @@ namespace mapmyfitnessapi_sdk.unit.tests.helpers.fakes
             return new FakeHttpClient(content,httpStatusCode,mediaType);
         }
 
-
     }
 }
