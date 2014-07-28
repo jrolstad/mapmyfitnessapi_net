@@ -42,6 +42,7 @@ namespace mapmyfitnessapi_sdk.unit.tests.workouts
             AssertWorkoutData(firstWorkout);
         }
 
+
         private static void AssertRequestHeaders(HttpClient client, string apiKey, string accessToken)
         {
             Assert.That(client.DefaultRequestHeaders.GetValues("Api-Key").First(), Is.EqualTo(apiKey));

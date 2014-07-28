@@ -41,7 +41,13 @@ namespace mapmyfitnessapi_sdk.workouts
 
                 var requestUri = MapRequestToUrlParameters(request);
 
-                var workouts =  GetWorkouts(client, requestUri);
+                if (request.WorkoutId.HasValue)
+                {
+                    var singleWorkout = GetWorkout(client, requestUri);
+                    return singleWorkout;
+                }
+
+                var workouts = GetWorkouts(client, requestUri);
 
                 return workouts;
             }
@@ -49,6 +55,12 @@ namespace mapmyfitnessapi_sdk.workouts
 
         private static string MapRequestToUrlParameters(WorkoutApiRequest request)
         {
+            if (request.WorkoutId.HasValue)
+            {
+                var workoutRequestUri = string.Format("v7.0/workout/{0}/", request.WorkoutId);
+                return workoutRequestUri;
+            }
+
             var requestUri = string.Format("v7.0/workout/?user={0}", request.UserId);
 
             if (request.ActivityType.HasValue)
@@ -59,6 +71,7 @@ namespace mapmyfitnessapi_sdk.workouts
 
             if (request.StartedBefore.HasValue)
                 requestUri += string.Format("&started_before={0:u}", request.StartedAfter);
+
             return requestUri;
         }
 
@@ -68,6 +81,7 @@ namespace mapmyfitnessapi_sdk.workouts
             if (response.IsSuccessStatusCode)
             {
                 var workoutData = response.Content.ReadAsAsync<dynamic>().Result;
+
                 var workouts = Map(workoutData);
 
                 var nextLink = MapLink(workoutData._links.next);
@@ -82,6 +96,22 @@ namespace mapmyfitnessapi_sdk.workouts
             }
 
             
+
+            throw new HttpRequestException(string.Format("Http Status:{0}| Reason:{1}", response.StatusCode,
+                response.ReasonPhrase));
+        }
+
+        private List<Workout> GetWorkout(HttpClient client, string requestUri)
+        {
+            var response = client.GetAsync(requestUri).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var workoutData = response.Content.ReadAsAsync<dynamic>().Result;
+
+                var workout = MapWorkout(workoutData);
+
+                return new List<Workout>{workout};
+            }
 
             throw new HttpRequestException(string.Format("Http Status:{0}| Reason:{1}", response.StatusCode,
                 response.ReasonPhrase));
