@@ -32,7 +32,45 @@ namespace mapmyfitnessapi_sdk.usergears
 
         public List<UserGear> Get(UserGearApiRequest request)
         {
-            throw new NotImplementedException();
+            using (var client = _httpClientFactory.Create(_baseUrl))
+            {
+                client.BaseAddress = _baseUrl;
+                client.DefaultRequestHeaders.Add("Api-Key", request.ApiKey);
+                client.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", request.AccessToken));
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var requestUri = string.Format("/api/0.1/usergear/");
+
+                var items = GetUserGearCollection(client, requestUri);
+
+                return items;
+            }
+        }
+
+        private List<UserGear> GetUserGearCollection(HttpClient client, string requestUri)
+        {
+            var response = client.GetAsync(requestUri).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var userGearData = response.Content.ReadAsAsync<dynamic>().Result;
+
+                var items = MapCollection(userGearData);
+
+                var nextLink = MapLink(userGearData._links.next);
+
+                if (nextLink != null)
+                {
+                    var nextItems = GetUserGearCollection(client, nextLink.Href);
+                    items.AddRange(nextItems);
+                }
+
+                return items;
+            }
+
+
+
+            throw new HttpRequestException(string.Format("Http Status:{0}| Reason:{1}", response.StatusCode,
+                response.ReasonPhrase));
         }
 
         public UserGear GetById(UserGearApiRequest request)
@@ -49,7 +87,7 @@ namespace mapmyfitnessapi_sdk.usergears
                 if (response.IsSuccessStatusCode)
                 {
                     var userData = response.Content.ReadAsAsync<dynamic>().Result;
-                    var user = Map(userData);
+                    var user = MapSingle(userData);
 
                     return user;
                 }
@@ -60,7 +98,20 @@ namespace mapmyfitnessapi_sdk.usergears
             }
         }
 
-        private UserGear Map(dynamic userGearData)
+        private List<UserGear> MapCollection(dynamic userGearData)
+        {
+            var workouts = new List<UserGear>();
+
+            foreach (var item in userGearData._embedded.usergear)
+            {
+                var workout = MapSingle(item);
+                workouts.Add(workout);
+            }
+
+            return workouts;
+        }
+
+        private UserGear MapSingle(dynamic userGearData)
         {
             var selfLink = MapLink(userGearData._links.self);
             var id = selfLink.Id;
@@ -68,6 +119,7 @@ namespace mapmyfitnessapi_sdk.usergears
             var purchaseDate = MapDateTime(userGearData.purchase_date);
 
             var gear = MapGear(userGearData.gear);
+            var rawData = userGearData.ToString();
 
             var userGear = new UserGear
             {
@@ -79,7 +131,8 @@ namespace mapmyfitnessapi_sdk.usergears
                 PurchaseDate = purchaseDate,
                 CurrentDistance = userGearData.current_distance,
                 Retired = userGearData.retired,
-                Gear = gear
+                Gear = gear,
+                RawJson = rawData
             };
 
             return userGear;

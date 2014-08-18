@@ -23,5 +23,7 @@ namespace mapmyfitnessapi_sdk.models
         public Link UserLink { get; set; }
 
         public Gear Gear { get; set; }
+
+        public string RawJson { get; set; }
     }
 }
