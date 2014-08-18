@@ -50,6 +50,10 @@ namespace mapmyfitnessapi_sdk.models
 
         public int Privacy { get; set; }
 
+        public int? UserGear { get; set; }
+
+        public Link UserGearLink { get; set; }
+
         public Link SelfLink { get; set; }
 
         public Link RouteLink { get; set; }

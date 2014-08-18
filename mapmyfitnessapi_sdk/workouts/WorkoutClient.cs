@@ -162,6 +162,11 @@ namespace mapmyfitnessapi_sdk.workouts
                 var privacyLink = MapLink(item._links.privacy);
                 var privacyId = Int32.Parse(privacyLink.Id);
 
+                var userGearLink = MapLink(item._links.usergear);
+                int? userGearId = null;
+                if(userGearLink != null)
+                    userGearId = Int32.Parse(userGearLink.Id);
+
 
                 var workout = new Workout
                 {
@@ -192,6 +197,8 @@ namespace mapmyfitnessapi_sdk.workouts
                     UserLink = userLink,
                     Privacy = privacyId,
                     PrivacyLink = privacyLink,
+                    UserGear = userGearId,
+                    UserGearLink = userGearLink,
                     RawData = rawData
                 };
 
