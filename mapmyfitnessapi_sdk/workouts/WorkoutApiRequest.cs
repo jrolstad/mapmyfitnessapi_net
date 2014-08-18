@@ -14,6 +14,8 @@ namespace mapmyfitnessapi_sdk.workouts
 
         public DateTime? StartedBefore { get; set; }
 
+        public bool? TimeSeries { get; set; }
+
         public WorkoutApiRequest WithUserId(int id)
         {
             UserId = id;
@@ -48,5 +50,14 @@ namespace mapmyfitnessapi_sdk.workouts
 
             return this;
         }
+
+        public WorkoutApiRequest WithTimeSeries(bool value)
+        {
+            TimeSeries = value;
+
+            return this;
+        }
+
+       
     }
 }

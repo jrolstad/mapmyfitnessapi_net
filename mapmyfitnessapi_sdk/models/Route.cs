@@ -42,6 +42,8 @@ namespace mapmyfitnessapi_sdk.models
         public Link ThumbnailLink { get; set; }
 
         public Link AlternateLink { get; set; }
+
+        public string JsonData { get; set; }
        
     }
 

@@ -60,7 +60,7 @@ namespace mapmyfitnessapi_sdk.models
 
         public Link PrivacyLink { get; set; }
 
-
+        public string RawData { get; set; }
 
     }
 }

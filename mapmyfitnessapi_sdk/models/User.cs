@@ -51,5 +51,7 @@ namespace mapmyfitnessapi_sdk.models
         public Link FriendshipsLink { get; set; }
         public Link WorkoutsLink { get; set; }
         public Link SelfLink { get; set; }
+
+        public string JsonData { get; set; }
     }
 }

@@ -58,6 +58,10 @@ namespace mapmyfitnessapi_sdk.workouts
             if (request.WorkoutId.HasValue)
             {
                 var workoutRequestUri = string.Format("v7.0/workout/{0}/", request.WorkoutId);
+
+                if (request.TimeSeries.HasValue && request.TimeSeries == true)
+                    workoutRequestUri += "?field_set=time_series";
+
                 return workoutRequestUri;
             }
 
@@ -71,6 +75,8 @@ namespace mapmyfitnessapi_sdk.workouts
 
             if (request.StartedBefore.HasValue)
                 requestUri += string.Format("&started_before={0:u}", request.StartedAfter);
+
+          
 
             return requestUri;
         }
@@ -138,6 +144,8 @@ namespace mapmyfitnessapi_sdk.workouts
 
             try
             {
+                var rawData = item.ToString();
+
                 var startDateTime = MapDateTime(item.start_datetime);
                 var updatedDateTime = MapDateTime(item.updated_datetime);
                 var createdDateTime = MapDateTime(item.created_datetime);
@@ -183,7 +191,8 @@ namespace mapmyfitnessapi_sdk.workouts
                     User = userId,
                     UserLink = userLink,
                     Privacy = privacyId,
-                    PrivacyLink = privacyLink
+                    PrivacyLink = privacyLink,
+                    RawData = rawData
                 };
 
                 return workout;
