@@ -49,14 +49,18 @@
     <Compile Include="authentication\AuthenticationClient.cs" />
     <Compile Include="authentication\AuthenticationApiRequest.cs" />
     <Compile Include="models\AuthenticationDetail.cs" />
+    <Compile Include="models\Gear.cs" />
     <Compile Include="models\Link.cs" />
     <Compile Include="models\Route.cs" />
     <Compile Include="models\User.cs" />
+    <Compile Include="models\UserGear.cs" />
     <Compile Include="models\Workout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="routes\RouteApiRequest.cs" />
     <Compile Include="routes\RouteClient.cs" />
     <Compile Include="services\MmfHttpClientFactory.cs" />
+    <Compile Include="usergears\UserGearApiRequest.cs" />
+    <Compile Include="usergears\UserGearClient.cs" />
     <Compile Include="users\UserClient.cs" />
     <Compile Include="users\UserApiRequest.cs" />
     <Compile Include="MapMyFitnessApiRequest.cs" />
@@ -69,6 +73,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
