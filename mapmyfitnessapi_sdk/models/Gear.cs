@@ -2,8 +2,6 @@
 {
     public class Gear
     {
-        public int Id { get; set; }
-
         public string StyleNumber { get; set; }
 
         public string Color { get; set; }
@@ -44,7 +42,7 @@
 
         public string Gender { get; set; }
 
-        public int Upc { get; set; }
+        public long Upc { get; set; }
 
         public string ThumbnailUrl { get; set; }
 
@@ -54,6 +52,5 @@
 
         public string Msrp { get; set; }
 
-        public Link SelfLink { get; set; }
     }
 }

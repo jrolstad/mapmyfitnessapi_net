@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="ConfigurationValues.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="usergears\UserGearClientTests.cs" />
     <Compile Include="users\UserClientTests.cs" />
   </ItemGroup>
   <ItemGroup>

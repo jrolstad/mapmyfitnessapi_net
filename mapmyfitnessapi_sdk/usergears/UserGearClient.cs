@@ -114,11 +114,12 @@ namespace mapmyfitnessapi_sdk.usergears
         private UserGear MapSingle(dynamic userGearData)
         {
             var selfLink = MapLink(userGearData._links.self);
-            var id = selfLink.Id;
+            var userLink = MapLink(userGearData._links.user);
+            var id = int.Parse(selfLink.Id);
 
             var purchaseDate = MapDateTime(userGearData.purchase_date);
 
-            var gear = MapGear(userGearData.gear);
+            var gear = MapGear(userGearData._embedded.gear);
             var rawData = userGearData.ToString();
 
             var userGear = new UserGear
@@ -132,6 +133,7 @@ namespace mapmyfitnessapi_sdk.usergears
                 CurrentDistance = userGearData.current_distance,
                 Retired = userGearData.retired,
                 Gear = gear,
+                UserLink = userLink,
                 RawJson = rawData
             };
 
