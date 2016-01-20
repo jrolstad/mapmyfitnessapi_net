@@ -50,6 +50,7 @@
     <Compile Include="activitytypes\ActivityTypeClient.cs" />
     <Compile Include="authentication\AuthenticationClient.cs" />
     <Compile Include="authentication\AuthenticationApiRequest.cs" />
+    <Compile Include="extensions\EnumerableExtensions.cs" />
     <Compile Include="models\ActivityType.cs" />
     <Compile Include="models\AuthenticationDetail.cs" />
     <Compile Include="models\Gear.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="users\UserClient.cs" />
     <Compile Include="users\UserApiRequest.cs" />
     <Compile Include="MapMyFitnessApiRequest.cs" />
+    <Compile Include="utilities\LinkMapper.cs" />
     <Compile Include="workouts\WorkoutApiRequest.cs" />
     <Compile Include="workouts\WorkoutClient.cs" />
   </ItemGroup>
