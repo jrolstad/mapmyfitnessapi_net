@@ -33,8 +33,8 @@ namespace mapmyfitnessapi_sdk.models
         public string RawData { get; set; }
 
         public ActivityType Parent { get; set; }
+
         public ActivityType Root { get; set; }
-        public List<ActivityType> Children { get; set; }
     }
 
     public class MetsSpeed

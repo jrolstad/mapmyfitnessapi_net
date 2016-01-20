@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using mapmyfitnessapi_sdk.models;
 using mapmyfitnessapi_sdk.services;
+using mapmyfitnessapi_sdk.utilities;
 
 namespace mapmyfitnessapi_sdk.workouts
 {
@@ -90,7 +91,7 @@ namespace mapmyfitnessapi_sdk.workouts
 
                 var workouts = Map(workoutData);
 
-                var nextLink = MapLink(workoutData._links.next);
+                var nextLink = LinkMapper.MapLink(workoutData._links.next);
 
                 if (nextLink != null)
                 {
@@ -139,7 +140,7 @@ namespace mapmyfitnessapi_sdk.workouts
         private Workout MapWorkout(dynamic item)
         {
         
-            var selfLink = MapLink(item._links.self);
+            var selfLink = LinkMapper.MapLink(item._links.self);
             var workoutId = Int32.Parse(selfLink.Id);
 
             try
@@ -150,19 +151,19 @@ namespace mapmyfitnessapi_sdk.workouts
                 var updatedDateTime = MapDateTime(item.updated_datetime);
                 var createdDateTime = MapDateTime(item.created_datetime);
 
-                var routeLink = MapLink(item._links.route);
+                var routeLink = LinkMapper.MapLink(item._links.route);
                 var routeId = routeLink != null ? Int32.Parse(routeLink.Id):null;
 
-                var activityTypeLink = MapLink(item._links.activity_type);
+                var activityTypeLink = LinkMapper.MapLink(item._links.activity_type);
                 var activityTypeId = Int32.Parse(activityTypeLink.Id);
 
-                var userLink = MapLink(item._links.user);
+                var userLink = LinkMapper.MapLink(item._links.user);
                 var userId = Int32.Parse(userLink.Id);
 
-                var privacyLink = MapLink(item._links.privacy);
+                var privacyLink = LinkMapper.MapLink(item._links.privacy);
                 var privacyId = Int32.Parse(privacyLink.Id);
 
-                var userGearLink = MapLink(item._links.usergear);
+                var userGearLink = LinkMapper.MapLink(item._links.usergear);
                 int? userGearId = null;
                 if(userGearLink != null)
                     userGearId = Int32.Parse(userGearLink.Id);
@@ -221,34 +222,6 @@ namespace mapmyfitnessapi_sdk.workouts
             var date = DateTime.Parse(dateValue.ToString()).ToUniversalTime();
 
             return date;
-        }
-
-        private static List<Link> MapLinkCollection(dynamic linkData)
-        {
-            if(linkData == null)
-                return new List<Link>();
-
-            var links = new List<Link>();
-            foreach (var linkItem in linkData)
-            {
-                var link = new Link
-                {
-                    Href = linkItem.href,
-                    Id = linkItem.id,
-                    Name = linkItem.name
-                };
-                links.Add(link);
-            }
-            return links;
-        }
-
-        private static Link MapLink(dynamic linkData)
-        {
-           
-            List<Link> links = MapLinkCollection(linkData);
-            var link = links.FirstOrDefault();
-
-            return link;
         }
     }
 }

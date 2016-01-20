@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using mapmyfitnessapi_sdk.extensions;
 using mapmyfitnessapi_sdk.models;
 using mapmyfitnessapi_sdk.services;
 using mapmyfitnessapi_sdk.users;
+using mapmyfitnessapi_sdk.utilities;
 
 namespace mapmyfitnessapi_sdk.activitytypes
 {
@@ -42,7 +45,7 @@ namespace mapmyfitnessapi_sdk.activitytypes
                 var requestUri = string.Format("v7.1/activity_type/");
 
                 var items = GetActivityTypeCollection(client, requestUri);
-
+                AssignParents(items);
                 return items;
             }
         }
@@ -56,7 +59,7 @@ namespace mapmyfitnessapi_sdk.activitytypes
 
                 var items = MapCollection(activityTypeData);
 
-                var nextLink = MapLink(activityTypeData._links.next);
+                var nextLink = LinkMapper.MapLink(activityTypeData._links.next);
 
                 if (nextLink != null)
                 {
@@ -88,12 +91,12 @@ namespace mapmyfitnessapi_sdk.activitytypes
 
         private ActivityType MapSingle(dynamic activityTypeData)
         {
-            var selfLink = MapLink(activityTypeData._links.self);
+            var selfLink = LinkMapper.MapLink(activityTypeData._links.self);
             var id = int.Parse(selfLink.Id);
 
-            var iconLink = MapLink(activityTypeData._links.icon_url);
-            var rootLink = MapLink(activityTypeData._links.root);
-            var parentLink = MapLink(activityTypeData._links.parent);
+            var iconLink = LinkMapper.MapLink(activityTypeData._links.icon_url);
+            var rootLink = LinkMapper.MapLink(activityTypeData._links.root);
+            var parentLink = LinkMapper.MapLink(activityTypeData._links.parent);
 
             var template = MapTemplate(activityTypeData);
            
@@ -133,32 +136,24 @@ namespace mapmyfitnessapi_sdk.activitytypes
             return template;
         }
 
-        private static List<Link> MapLinkCollection(dynamic linkData)
-        {
-            if (linkData == null)
-                return new List<Link>();
 
-            var links = new List<Link>();
-            foreach (var linkItem in linkData)
+        private void AssignParents(List<ActivityType> activityTypes)
+        {
+            var activityTypesById = activityTypes.ToDictionaryExplicit(at => at.Id);
+
+            foreach (var type in activityTypes)
             {
-                var link = new Link
+                if (type.ParentLink != null)
                 {
-                    Href = linkItem.href,
-                    Id = linkItem.id,
-                    Name = linkItem.name
-                };
-                links.Add(link);
+                    var parent = activityTypesById.Value(int.Parse(type.ParentLink.Id));
+                    type.Parent = parent;
+                }
+                if(type.RootLink!=null)
+                {
+                    var root = activityTypesById.Value(int.Parse(type.RootLink.Id));
+                    type.Root = root;
+                }
             }
-            return links;
-        }
-
-        private static Link MapLink(dynamic linkData)
-        {
-
-            List<Link> links = MapLinkCollection(linkData);
-            var link = links.FirstOrDefault();
-
-            return link;
         }
     }
 }

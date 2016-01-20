@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using mapmyfitnessapi_sdk.models;
 using mapmyfitnessapi_sdk.services;
+using mapmyfitnessapi_sdk.utilities;
 
 namespace mapmyfitnessapi_sdk.usergears
 {
@@ -56,7 +57,7 @@ namespace mapmyfitnessapi_sdk.usergears
 
                 var items = MapCollection(userGearData);
 
-                var nextLink = MapLink(userGearData._links.next);
+                var nextLink = LinkMapper.MapLink(userGearData._links.next);
 
                 if (nextLink != null)
                 {
@@ -113,8 +114,8 @@ namespace mapmyfitnessapi_sdk.usergears
 
         private UserGear MapSingle(dynamic userGearData)
         {
-            var selfLink = MapLink(userGearData._links.self);
-            var userLink = MapLink(userGearData._links.user);
+            var selfLink = LinkMapper.MapLink(userGearData._links.self);
+            var userLink = LinkMapper.MapLink(userGearData._links.user);
             var id = int.Parse(selfLink.Id);
 
             var purchaseDate = MapDateTime(userGearData.purchase_date);
@@ -174,34 +175,6 @@ namespace mapmyfitnessapi_sdk.usergears
             };
 
             return gear;
-        }
-
-        private static List<Link> MapLinkCollection(dynamic linkData)
-        {
-            if (linkData == null)
-                return new List<Link>();
-
-            var links = new List<Link>();
-            foreach (var linkItem in linkData)
-            {
-                var link = new Link
-                {
-                    Href = linkItem.href,
-                    Id = linkItem.id,
-                    Name = linkItem.name
-                };
-                links.Add(link);
-            }
-            return links;
-        }
-
-        private static Link MapLink(dynamic linkData)
-        {
-
-            List<Link> links = MapLinkCollection(linkData);
-            var link = links.FirstOrDefault();
-
-            return link;
         }
 
         private static DateTime? MapDateTime(dynamic dateValue)

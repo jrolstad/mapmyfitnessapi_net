@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using mapmyfitnessapi_sdk.models;
 using System.Linq;
 using mapmyfitnessapi_sdk.services;
+using mapmyfitnessapi_sdk.utilities;
 
 namespace mapmyfitnessapi_sdk.users
 {
@@ -86,16 +87,16 @@ namespace mapmyfitnessapi_sdk.users
             var lastLogin = MapDateTime(userData.last_login);
             var birthDate = MapDateTime(userData.birthdate);
 
-            var documentationLink = MapLink(userData._links.documentation);
-            var deactivationLink = MapLink(userData._links.deactivation);
-            var userAchievementLink = MapLink(userData._links.user_achievements); 
-            var friendshipLink = MapLink(userData._links.friendships); 
-            var workoutLink = MapLink(userData._links.workouts); 
-            var selfLink = MapLink(userData._links.self);
+            var documentationLink = LinkMapper.MapLink(userData._links.documentation);
+            var deactivationLink = LinkMapper.MapLink(userData._links.deactivation);
+            var userAchievementLink = LinkMapper.MapLink(userData._links.user_achievements); 
+            var friendshipLink = LinkMapper.MapLink(userData._links.friendships); 
+            var workoutLink = LinkMapper.MapLink(userData._links.workouts); 
+            var selfLink = LinkMapper.MapLink(userData._links.self);
 
-            var imageLinks = MapLinkCollection(userData._links.image);
-            var privacyLinks = MapLinkCollection(userData._links.privacy);
-            var statisticLinks = MapLinkCollection(userData._links.stats);
+            var imageLinks = LinkMapper.MapLinkCollection(userData._links.image);
+            var privacyLinks = LinkMapper.MapLinkCollection(userData._links.privacy);
+            var statisticLinks = LinkMapper.MapLinkCollection(userData._links.stats);
 
             dynamic sharingData = userData.sharing ?? new { twitter = (bool?)null,facebook = (bool?)null };
             dynamic locationData = userData.location ?? new {country = (string)null, region = (string)null, locality = (string)null, address = (string)null };
@@ -153,33 +154,5 @@ namespace mapmyfitnessapi_sdk.users
             return date;
         }
 
-        private static List<Link> MapLinkCollection(dynamic linkData)
-        {
-            if (linkData == null)
-                return new List<Link>();
-
-            var links = new List<Link>();
-
-            foreach (var linkItem in linkData)
-            {
-                var link = new Link
-                {
-                    Href = linkItem.href, 
-                    Id = linkItem.id, 
-                    Name = linkItem.name
-                };
-                links.Add(link);
-            }
-            return links;
-        }
-
-        private static Link MapLink(dynamic linkData)
-        {
-
-            List<Link> links = MapLinkCollection(linkData);
-            var link = links.FirstOrDefault();
-
-            return link;
-        }
     }
 }
