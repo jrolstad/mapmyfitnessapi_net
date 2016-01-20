@@ -7,5 +7,6 @@ namespace mapmyfitnessapi_sdk.integration.tests
         public const int OtherUserId = 1;
         public const string ApiKey = "";
         public const string AccessToken = "";
+        public const int UserGearId = 1;
     }
 }
