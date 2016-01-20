@@ -4,7 +4,7 @@ using mapmyfitnessapi_sdk.models;
 
 namespace mapmyfitnessapi_sdk.utilities
 {
-    public static class LinkMapper
+    internal static class LinkMapper
     {
         public static List<Link> MapLinkCollection(dynamic linkData)
         {

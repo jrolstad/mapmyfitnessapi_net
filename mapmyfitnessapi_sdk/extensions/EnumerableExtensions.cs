@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace mapmyfitnessapi_sdk.extensions
 {
-    public static class EnumerableExtensions
+    internal static class EnumerableExtensions
     {
         /// <summary>
         /// Converts an enumerable to a dictionary.  If it can't, then gives a good reason why
