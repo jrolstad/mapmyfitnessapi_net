@@ -39,7 +39,7 @@ namespace mapmyfitnessapi_sdk.usergears
                 client.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", request.AccessToken));
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var requestUri = string.Format("/api/0.1/usergear/");
+                var requestUri = string.Format("v7.1/usergear/");
 
                 var items = GetUserGearCollection(client, requestUri);
 
@@ -82,7 +82,7 @@ namespace mapmyfitnessapi_sdk.usergears
                 client.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", request.AccessToken));
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var requestUri = string.Format("/api/0.1/usergear/{0}/", request.UserGearId);
+                var requestUri = string.Format("v7.1/usergear/{0}/", request.UserGearId);
                 var response = client.GetAsync(requestUri).Result;
                 if (response.IsSuccessStatusCode)
                 {

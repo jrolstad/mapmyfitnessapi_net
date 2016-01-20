@@ -38,7 +38,7 @@ namespace mapmyfitnessapi_sdk.users
 				client.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", request.AccessToken));
 				client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-				var response = client.GetAsync("v7.0/user/self/").Result;
+				var response = client.GetAsync("v7.1/user/self/").Result;
 				if (response.IsSuccessStatusCode)
 				{
 					var userData = response.Content.ReadAsAsync<dynamic>().Result;
@@ -62,7 +62,7 @@ namespace mapmyfitnessapi_sdk.users
                 client.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", request.AccessToken));
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var requestUri = string.Format("v7.0/user/{0}/",request.UserId);
+                var requestUri = string.Format("v7.1/user/{0}/",request.UserId);
                 var response = client.GetAsync(requestUri).Result;
                 if (response.IsSuccessStatusCode)
                 {

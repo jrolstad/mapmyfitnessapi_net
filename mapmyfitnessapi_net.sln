@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mapmyfitnessapi_sdk.integration.tests", "mapmyfitnessapi_sdk.integration.tests\mapmyfitnessapi_sdk.integration.tests.csproj", "{A3D01EE6-73F8-4D48-84B5-34658BA205DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{217FA138-1037-4106-945B-EF155474102E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{217FA138-1037-4106-945B-EF155474102E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{217FA138-1037-4106-945B-EF155474102E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3D01EE6-73F8-4D48-84B5-34658BA205DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3D01EE6-73F8-4D48-84B5-34658BA205DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3D01EE6-73F8-4D48-84B5-34658BA205DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3D01EE6-73F8-4D48-84B5-34658BA205DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
