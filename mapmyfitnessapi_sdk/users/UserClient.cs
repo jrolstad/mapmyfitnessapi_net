@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using mapmyfitnessapi_sdk.models;
@@ -96,6 +97,10 @@ namespace mapmyfitnessapi_sdk.users
             var privacyLinks = MapLinkCollection(userData._links.privacy);
             var statisticLinks = MapLinkCollection(userData._links.stats);
 
+            dynamic sharingData = userData.sharing ?? new { twitter = (bool?)null,facebook = (bool?)null };
+            dynamic locationData = userData.location ?? new {country = (string)null, region = (string)null, locality = (string)null, address = (string)null };
+            dynamic communicationData = userData.communication ?? new {promotions=(bool?)null, newsletter = (bool?)null,system_messages = (string)null };
+
             return new User
 			{ 
 				LastName = userData.last_name,
@@ -104,9 +109,9 @@ namespace mapmyfitnessapi_sdk.users
                 Hobbies = userData.hobbies,
                 DateJoined = dateJoined,
 				Id = userData.id,
-				ReceivePromotions = userData.communication.promotions,
-				ReceiveNewsletter = userData.communication.newsletter,
-				ReceiveSystemMessages = userData.communication.system_messages,
+				ReceivePromotions = communicationData.promotions,
+				ReceiveNewsletter = communicationData.newsletter,
+				ReceiveSystemMessages = communicationData.system_messages,
                 FirstName = userData.first_name,
                 DisplayName = userData.display_name,
                 Introduction = userData.introduction,
@@ -114,13 +119,13 @@ namespace mapmyfitnessapi_sdk.users
                 LastLogin = lastLogin,
                 GoalStatement = userData.goal_statement,
                 Email = userData.email,
-                Country = userData.location.country,
-                Region = userData.location.region,
-                Locality = userData.location.locality,
-                Address = userData.location.address,
+                Country = locationData.country,
+                Region = locationData.region,
+                Locality = locationData.locality,
+                Address = locationData.address,
                 UserName = userData.username,
-                TwitterSharingEnabled = userData.sharing.twitter,
-                FacebookSharingEnabled = userData.sharing.facebook,
+                TwitterSharingEnabled = sharingData.twitter,
+                FacebookSharingEnabled = sharingData.facebook,
                 LastInitial = userData.last_initial,
                 Gender = userData.gender,
                 TimeZone = userData.time_zone,
@@ -150,7 +155,11 @@ namespace mapmyfitnessapi_sdk.users
 
         private static List<Link> MapLinkCollection(dynamic linkData)
         {
+            if (linkData == null)
+                return new List<Link>();
+
             var links = new List<Link>();
+
             foreach (var linkItem in linkData)
             {
                 var link = new Link
@@ -166,6 +175,7 @@ namespace mapmyfitnessapi_sdk.users
 
         private static Link MapLink(dynamic linkData)
         {
+
             List<Link> links = MapLinkCollection(linkData);
             var link = links.FirstOrDefault();
 

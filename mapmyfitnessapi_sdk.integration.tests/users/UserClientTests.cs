@@ -38,7 +38,7 @@ namespace mapmyfitnessapi_sdk.integration.tests.users
                 .WithAccessToken(ConfigurationValues.AccessToken);
 
             // Act
-            var response = client.GetAuthenticatedUser(request);
+            var response = client.Get(request);
 
             // Assert
             Assert.That(response.UserName, Is.Not.Null);

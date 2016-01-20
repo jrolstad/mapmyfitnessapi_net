@@ -19,14 +19,14 @@ namespace mapmyfitnessapi_sdk.models
         public string ProfileStatement { get; set; }
         public string Hobbies { get; set; }
 
-        public bool TwitterSharingEnabled { get; set; }
-        public bool FacebookSharingEnabled { get; set; }
+        public bool? TwitterSharingEnabled { get; set; }
+        public bool? FacebookSharingEnabled { get; set; }
 
         public string Gender { get; set; }
         public string TimeZone { get; set; }
         public DateTime? Birthdate { get; set; }
-        public double Height { get; set; }
-        public double Weight { get; set; }
+        public double? Height { get; set; }
+        public double? Weight { get; set; }
         public string DisplayMeasurementSystem { get; set; }
 
         public DateTime? DateJoined { get; set; }
@@ -37,9 +37,9 @@ namespace mapmyfitnessapi_sdk.models
         public string Locality { get; set; }
         public string Address { get; set; }
 
-        public bool ReceivePromotions { get; set; }
-        public bool ReceiveNewsletter { get; set; }
-        public bool ReceiveSystemMessages { get; set; }
+        public bool? ReceivePromotions { get; set; }
+        public bool? ReceiveNewsletter { get; set; }
+        public bool? ReceiveSystemMessages { get; set; }
 
         public List<Link> Statistics { get; set; }
         public List<Link> PrivacySettings { get; set; }
