@@ -187,6 +187,7 @@ namespace mapmyfitnessapi_sdk.workouts
                     ElapsedTime = item.aggregates.elapsed_time_total,
                     MetabolicEnergy = item.aggregates.metabolic_energy_total,
                     Source = item.source,
+                    SourceManufacturer =  item.source_manufacturer,
                     Name = item.name,
                     Id = workoutId,
                     SelfLink = selfLink,

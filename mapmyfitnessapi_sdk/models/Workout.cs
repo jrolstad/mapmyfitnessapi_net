@@ -20,6 +20,8 @@ namespace mapmyfitnessapi_sdk.models
 
         public string Source { get; set; }
 
+        public string SourceManufacturer { get; set; }
+
         public bool HasTimeSeries { get; set; }
 
         public bool IsVerified { get; set; }
