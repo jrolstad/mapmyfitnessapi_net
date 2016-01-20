@@ -46,8 +46,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="activitytypes\ActivityTypeApiRequest.cs" />
+    <Compile Include="activitytypes\ActivityTypeClient.cs" />
     <Compile Include="authentication\AuthenticationClient.cs" />
     <Compile Include="authentication\AuthenticationApiRequest.cs" />
+    <Compile Include="models\ActivityType.cs" />
     <Compile Include="models\AuthenticationDetail.cs" />
     <Compile Include="models\Gear.cs" />
     <Compile Include="models\Link.cs" />
