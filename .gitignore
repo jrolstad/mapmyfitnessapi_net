@@ -6,3 +6,5 @@ bin/
 packages/
 *.ncrunchsolution
 *.ncrunchproject
+*.v12.suo
+*.suo

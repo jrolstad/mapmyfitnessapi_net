@@ -1,11 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mapmyfitnessapi_sdk", "mapmyfitnessapi_sdk\mapmyfitnessapi_sdk.csproj", "{BEA07739-A054-478A-A173-63828210D0F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mapmyfitnessapi_sdk.unit.tests", "mapmyfitnessapi_sdk.unit.tests\mapmyfitnessapi_sdk.unit.tests.csproj", "{217FA138-1037-4106-945B-EF155474102E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9BDE6077-2176-4B91-853F-DF5D5EA65D5E}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

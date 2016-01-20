@@ -75,5 +75,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="authentication\" />
+  </ItemGroup>
 </Project>
