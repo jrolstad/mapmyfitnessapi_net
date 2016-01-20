@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="authentication\AuthenticationClientTests.cs" />
     <Compile Include="helpers\fakes\FakeHttpClient.cs" />
     <Compile Include="helpers\fakes\FakeHttpMessageHandler.cs" />
     <Compile Include="helpers\TestCompositionRoot.cs" />
@@ -75,7 +76,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Folder Include="authentication\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

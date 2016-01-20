@@ -11,7 +11,7 @@ namespace mapmyfitnessapi_sdk.authentication
         private readonly MmfHttpClientFactory _httpClientFactory;
         private readonly Uri _baseUrl;
 
-        public AuthenticationClient() : this("https://oauth2-api.mapmyapi.com")
+        public AuthenticationClient() : this("https://api.mapmyfitness.com")
         {
 
         }
@@ -35,7 +35,7 @@ namespace mapmyfitnessapi_sdk.authentication
                 client.DefaultRequestHeaders.Add("Api-Key", request.ApiKey);
 
                 var requestContent = CreateRequest(request);
-                var response = client.PostAsync("v7.0/oauth2/access_token/", requestContent).Result;
+                var response = client.PostAsync("v7.1/oauth2/access_token/", requestContent).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
