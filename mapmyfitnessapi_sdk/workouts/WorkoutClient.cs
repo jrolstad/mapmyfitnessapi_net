@@ -33,6 +33,9 @@ namespace mapmyfitnessapi_sdk.workouts
 
         public List<Workout> Get(WorkoutApiRequest request)
         {
+            if(request.UserId == default(int))
+                throw new ArgumentException("The UserId must be specified in the request","request");
+
             using (var client = _httpClientFactory.Create(_baseUrl))
             {
                 client.BaseAddress = _baseUrl;
@@ -58,7 +61,7 @@ namespace mapmyfitnessapi_sdk.workouts
         {
             if (request.WorkoutId.HasValue)
             {
-                var workoutRequestUri = string.Format("v7.0/workout/{0}/", request.WorkoutId);
+                var workoutRequestUri = string.Format("v7.1/workout/{0}/", request.WorkoutId);
 
                 if (request.TimeSeries.HasValue && request.TimeSeries == true)
                     workoutRequestUri += "?field_set=time_series";
@@ -66,7 +69,8 @@ namespace mapmyfitnessapi_sdk.workouts
                 return workoutRequestUri;
             }
 
-            var requestUri = string.Format("v7.0/workout/?user={0}", request.UserId);
+            
+            var requestUri = string.Format("v7.1/workout/?user={0}", request.UserId);
 
             if (request.ActivityType.HasValue)
                 requestUri += string.Format("&activity_type={0}", request.ActivityType);

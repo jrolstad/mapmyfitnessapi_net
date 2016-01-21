@@ -46,7 +46,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="authentication\AuthenticationClientTests.cs" />
     <Compile Include="helpers\fakes\FakeHttpClient.cs" />
     <Compile Include="helpers\fakes\FakeHttpMessageHandler.cs" />
     <Compile Include="helpers\TestCompositionRoot.cs" />
